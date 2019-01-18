@@ -22,11 +22,10 @@ io.on("connection", socket => {
         socket.broadcast.emit("mouse move", { id, x, y });
     });
     socket.on("mouse state change", ({ state }) => {
-        console.log("state changed");
         socket.broadcast.emit("mouse state change", { id, state });
     });
 })
 
 http.listen("3000", () => {
-    console.log("listening on :3000");
+    console.log("listening on http://localhost:3000");
 })
