@@ -52,34 +52,33 @@ function setTargetState(id, state) {
 }
 
 function init() {
-    console.log("initializing");
     let socket = io();
+
     document.addEventListener("mousemove", ({ clientX: x, clientY: y }) => {
-        console.log("moving");
         socket.emit("mouse move", { x, y });
     });
+
     document.addEventListener("mousedown", () => {
-        console.log("down");
         socket.emit("mouse state change", { state: "down" });
     });
+
     document.addEventListener("mouseup", () => {
-        console.log("up");
         socket.emit("mouse state change", { state: "up" });
     });
+
     socket.on("client connected", ({ id }) => {
-        console.log("client connected", id);
         addClient(id);
     });
+
     socket.on("client disconnected", ({ id }) => {
-        console.log("client disconnected", id);
         removeClient(id);
     });
+
     socket.on("mouse state change", ({ id, state }) => {
-        console.log("client mouse state changed", id, state);
         setTargetState(id, state);
     });
+
     socket.on("mouse move", ({ id, x, y }) => {
-        console.log("client mouse moved", id, x, y);
         moveMouseTarget(id, x, y);
     });
 }
