@@ -4,7 +4,7 @@ const http = require("http").Server(app);
 const io = require("socket.io")(http);
 const path = require("path");
 const createUUID = require("uuid/v4");
-const port = process.env.port || 3000;
+const PORT = process.env.PORT || 5000
 
 app.use(express.static(__dirname + "/public"));
 
@@ -27,6 +27,6 @@ io.on("connection", socket => {
     });
 })
 
-http.listen(port, () => {
-    console.log("listening on http://localhost:3000");
+http.listen(PORT, () => {
+    console.log(`listening on $:${PORT}`);
 })
